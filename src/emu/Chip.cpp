@@ -47,7 +47,7 @@ void Chip::init()
     this-> delayTimer = 0;
     this-> soundTimer = 0;
 
-    log("Chip initialized");
+    log("Chip initialized\n");
 }
 
 void Chip::loadRom(string file)
@@ -71,12 +71,26 @@ void Chip::loadRom(string file)
     {
         this->memory[i+0x200] = buffer[i];
         // log(buffer[i]);
+        // log("\n");
     }
 
-    log("ROM loaded");
+    log("ROM loaded\n");
 }
 
 void Chip::tick()
 {
+    this->opcode = this->memory[this->pc] << 8 | this->memory[this->pc+1]; //2 bytes
+    log("opcode: ");
+    log(this->opcode);
+    log("\n");
+
+    if (this->delayTimer > 0) this->delayTimer--;
+    if (this->soundTimer > 0) 
+    {
+        if (this->soundTimer == 1)
+        {
+            log("[sound timer] play sound\n");
+        }
+    }
 
 }

@@ -8,4 +8,5 @@ int main() {
 
     chip.init();
     chip.loadRom("IBM.ch8");
+    chip.tick();
 }
