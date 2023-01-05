@@ -7,4 +7,5 @@ int main() {
     Chip chip;
 
     chip.init();
+    chip.loadRom("IBM.ch8");
 }

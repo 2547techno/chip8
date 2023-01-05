@@ -2,6 +2,7 @@
 #include "Logging.hpp"
 
 #include <cstring>
+#include <stdio.h>
 
 const unsigned char Chip::chip8_fontset[80] =
 { 
@@ -51,7 +52,28 @@ void Chip::init()
 
 void Chip::loadRom(string file)
 {
-    
+    char path[128];
+    strcpy(path, "roms/");
+    strcat(path, file.c_str());
+
+    FILE* fp = fopen(path, "r");
+    if (fp == NULL) perror("Error opening file");
+    fseek(fp, 0, SEEK_END);
+    long int size = ftell(fp);
+    fclose(fp);
+
+    fp = fopen(path, "r");
+    unsigned char * buffer = (unsigned char *) malloc(size);
+    fread(buffer, sizeof(unsigned char), size, fp);
+    fclose(fp);
+
+    for (int i = 0; i < size; i++)
+    {
+        this->memory[i+0x200] = buffer[i];
+        // log(buffer[i]);
+    }
+
+    log("ROM loaded");
 }
 
 void Chip::tick()
