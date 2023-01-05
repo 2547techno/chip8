@@ -94,3 +94,33 @@ void Chip::tick()
     }
 
 }
+
+void Chip::setFlag(Flag flag, unsigned char value)
+{
+    switch (flag)
+    {
+    case Flag::DRAW:
+        this->memory[15] = value;
+        break;
+    }
+}
+
+void Chip::enableDrawFlag()
+{
+    this->setFlag(Flag::DRAW, 1);
+}
+
+void Chip::clearDrawFlag()
+{
+    this->setFlag(Flag::DRAW, 0);
+}
+
+unsigned char Chip::getFlag(Flag flag)
+{
+    switch (flag)
+    {
+    case Flag::DRAW:
+        return this->memory[15];
+        break;
+    }
+}

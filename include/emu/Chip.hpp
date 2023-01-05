@@ -7,9 +7,16 @@ using std::string;
 class Chip
 {
 public:
+    enum Flag
+    {
+        DRAW
+    };
+
     void init();
     void loadRom(string file);
     void tick();
+    unsigned char getFlag(Flag flag);
+
 
 private:
     unsigned short opcode;
@@ -39,4 +46,8 @@ private:
 
     // fontset
     const static unsigned char chip8_fontset[];
+
+    void setFlag(Flag flag, unsigned char value);
+    void enableDrawFlag();
+    void clearDrawFlag();
 };
