@@ -1,5 +1,10 @@
+#include "Logging.hpp"
+#include "emu/Chip.hpp"
+
 #include <iostream>
 
 int main() {
-    std::cout << "Hello world" << std::endl;
+    Chip chip;
+
+    chip.init();
 }
