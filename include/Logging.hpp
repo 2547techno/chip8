@@ -6,3 +6,4 @@ using std::string;
 
 void log(string text);
 void log(unsigned char byte);
+void log(unsigned short twoByte);
