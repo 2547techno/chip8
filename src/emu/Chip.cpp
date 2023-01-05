@@ -41,7 +41,7 @@ void Chip::init()
 
     //load fontset
     for(int i = 0; i < 80; ++i)
-        this->memory[i] = chip8_fontset[i];	
+        this->memory[i+0x050] = chip8_fontset[i];	
 
     this-> delayTimer = 0;
     this-> soundTimer = 0;
