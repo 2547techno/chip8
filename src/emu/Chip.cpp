@@ -83,9 +83,9 @@ void Chip::loadRom(string file)
 void Chip::tick()
 {
     this->opcode = this->memory[this->pc] << 8 | this->memory[this->pc+1]; //2 bytes
-    log("opcode: ");
-    log(this->opcode);
-    log("\n");
+    // log("opcode: ");
+    // log(this->opcode);
+    // log("\n");
 
     this->execOp(this->opcode);
 
@@ -133,6 +133,11 @@ unsigned short Chip::getPC()
 unsigned short Chip::getMemEnd()
 {
     return this->memEnd;
+}
+
+unsigned char* Chip::getGfx()
+{
+    return this->gfx;
 }
 
 unsigned char Chip::getFlag(Flag flag)

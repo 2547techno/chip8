@@ -18,6 +18,7 @@ public:
     unsigned char getFlag(Flag flag);
     unsigned short getPC();
     unsigned short getMemEnd();
+    unsigned char* getGfx();
     bool drawFlag;
 
 
