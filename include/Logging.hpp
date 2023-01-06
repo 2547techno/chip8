@@ -5,5 +5,5 @@
 using std::string;
 
 void log(string text);
-void log(unsigned char byte);
-void log(unsigned short twoByte);
+void log(unsigned char byte, bool padded = true);
+void log(unsigned short twoByte, bool padded = true);
