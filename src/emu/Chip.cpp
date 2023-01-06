@@ -72,11 +72,7 @@ void Chip::loadRom(string file)
     for (int i = 0; i < size; i++)
     {
         this->memory[i+0x200] = buffer[i];
-        // log(buffer[i]);
-        // log("\n");
     }
-    this->memEnd = size + 0x200;
-    // log(memEnd);
     log("\nROM loaded\n");
 }
 
@@ -105,52 +101,9 @@ void Chip::incrPC(int value)
     this->pc += value;
 }
 
-void Chip::setFlag(Flag flag, unsigned char value)
-{
-    switch (flag)
-    {
-    case Flag::DRAW:
-        this->memory[15] = value;
-        break;
-    }
-}
-
-void Chip::enableDrawFlag()
-{
-    this->setFlag(Flag::DRAW, 1);
-}
-
-void Chip::clearDrawFlag()
-{
-    this->setFlag(Flag::DRAW, 0);
-}
-
-unsigned short Chip::getPC()
-{
-    return this->pc;
-}
-
-unsigned short Chip::getMemEnd()
-{
-    return this->memEnd;
-}
-
 unsigned char* Chip::getGfx()
 {
     return this->gfx;
-}
-
-unsigned char Chip::getFlag(Flag flag)
-{
-    switch (flag)
-    {
-    case Flag::DRAW:
-        return this->memory[15];
-        break;
-
-    default:
-        return 0;
-    }
 }
 
 void Chip::clearDisplay()
@@ -245,28 +198,6 @@ void Chip::execOp(unsigned short op)
 
     case 0xD000: // DXYN | draw sprite at (Vx, Vy), width 8, height N, rows string from mem location I
         {
-            /*
-            unsigned short x = V[(op & 0x0F00) >> 8];
-            unsigned short y = V[(op & 0x00F0) >> 4];
-            unsigned short n = op & 0x000F;
-            unsigned short spriteRow;
-
-            V[0xF] = 0; // reset collision check
-            for(int row = 0; row < n; row++)
-            {
-                spriteRow = this->memory[this->I + row];
-                for(int pixelIndex = 0; pixelIndex < 8; pixelIndex++)
-                {
-                    int screenX = x + pixelIndex;
-                    int screenY = row;
-
-
-
-                }
-            }
-
-            this->incrPC();
-            */
             this->drawSprite();
             this->incrPC();
             break;
