@@ -16,6 +16,9 @@ public:
     void loadRom(string file);
     void tick();
     unsigned char getFlag(Flag flag);
+    unsigned short getPC();
+    unsigned short getMemEnd();
+    bool drawFlag;
 
 
 private:
@@ -26,6 +29,8 @@ private:
     0x050-0x0A0 - Used for the built in 4x5 pixel font set (0-F)
     0x200-0xFFF - Program ROM and work RAM
     */
+
+    unsigned short memEnd;
 
     unsigned char V[16];    // registers
     unsigned short I;       // index register
@@ -47,7 +52,14 @@ private:
     // fontset
     const static unsigned char chip8_fontset[];
 
+    void incrPC(int value = 2);
+
     void setFlag(Flag flag, unsigned char value);
     void enableDrawFlag();
     void clearDrawFlag();
+
+    void clearDisplay();
+    void drawSprite();
+
+    void execOp(unsigned short op);
 };

@@ -8,5 +8,8 @@ int main() {
 
     chip.init();
     chip.loadRom("IBM.ch8");
-    chip.tick();
+    while(chip.getPC() <= chip.getMemEnd())
+    {
+        chip.tick();
+    }
 }
